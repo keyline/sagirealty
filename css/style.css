@@ -197,3 +197,24 @@
   .footer-main{display:block}
   .footer-contact{margin-top:20px}
 }
+
+/* Balanced spacing for the two-column hero statistics on phones. */
+@media(max-width:480px){
+  .hero-points div{
+    padding:18px 16px 17px 0;
+  }
+  .hero-points div:nth-child(even){
+    padding-right:0;
+    padding-left:18px;
+  }
+  .hero-points b{
+    font-size:clamp(24px,8vw,30px);
+    line-height:1.08;
+    white-space:nowrap;
+  }
+  .hero-points span{
+    margin-top:8px;
+    font-size:11px;
+    line-height:1.3;
+  }
+}
