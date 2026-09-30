@@ -1,0 +1,12 @@
+/smtp-config.php
+/vendor/
+node_modules/
+npm-debug.log
+yarn-error.log
+.env
+.env.*
+auth.json
+.phpunit.result.cache
+.DS_Store
+Thumbs.db
+

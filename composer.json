@@ -1,0 +1,8 @@
+{
+    "name": "keylines/sagi-realty-landing-page",
+    "description": "SAGI Realty landing page and SMTP lead form",
+    "license": "proprietary",
+    "require": {
+        "phpmailer/phpmailer": "^7.1"
+    }
+}
