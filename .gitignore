@@ -10,3 +10,17 @@ auth.json
 .DS_Store
 Thumbs.db
 
+# Existing repository exclusions
+bootstrap/compiled.php
+app/storage/
+public/storage
+public/hot
+public_html/storage
+public_html/hot
+storage/*.key
+Homestead.yaml
+Homestead.json
+/.vagrant
+/public/build
+/storage/pail
+.phpactor.json
