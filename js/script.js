@@ -139,7 +139,12 @@ document.addEventListener("DOMContentLoaded", () => {
     button.querySelector(".btn-label").textContent = "Sending...";
 
     try {
-      const response = await fetch(form.action, {
+      const isGitHubPages = window.location.hostname.endsWith(".github.io");
+      const submissionUrl = isGitHubPages && form.dataset.staticAction
+        ? form.dataset.staticAction
+        : form.action;
+
+      const response = await fetch(submissionUrl, {
         method: "POST",
         body: new FormData(form),
         headers: {
@@ -154,10 +159,16 @@ document.addEventListener("DOMContentLoaded", () => {
       try {
         result = JSON.parse(responseText);
       } catch (parseError) {
-        throw new Error("The server did not execute submit.php. Use PHP hosting or start the local PHP server.");
+        throw new Error(
+          isGitHubPages
+            ? "The enquiry service returned an invalid response. Please try again shortly."
+            : "The server did not execute submit.php. Use PHP hosting or start the local PHP server."
+        );
       }
 
-      if (response.ok && result.success) {
+      const submitted = result.success === true || result.success === "true";
+
+      if (response.ok && submitted) {
         window.location.href = result.redirect || "thank-you.html";
         return;
       }
