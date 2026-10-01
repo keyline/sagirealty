@@ -226,7 +226,8 @@
 .top-contact-inner{min-height:35px;display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
 .top-contact-inner>span{color:rgba(255,255,255,.62)}
 .top-contact-links{display:flex;align-items:center;gap:20px}
-.top-contact-links a{transition:color .2s}
+.top-contact-links a{display:inline-flex;align-items:center;gap:7px;transition:color .2s}
+.top-contact-icon{color:var(--gold);font-size:13px;line-height:1}
 .top-contact-links a:hover{color:var(--gold)}
 .hero{padding-top:183px}
 .contact-section{background:#fff;border-top:1px solid var(--line)}
