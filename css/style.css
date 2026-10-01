@@ -223,7 +223,7 @@
 
 /* Contact header and direct-contact section */
 .top-contact-bar{background:var(--midnight);color:#fff}
-.top-contact-inner{min-height:35px;display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.top-contact-inner{min-height:35px;display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
 .top-contact-inner>span{color:rgba(255,255,255,.62)}
 .top-contact-links{display:flex;align-items:center;gap:20px}
 .top-contact-links a{display:inline-flex;align-items:center;gap:7px;transition:color .2s}
@@ -238,7 +238,7 @@
 .contact-actions{border-top:1px solid var(--line)}
 .contact-action{display:flex;align-items:baseline;justify-content:space-between;gap:22px;padding:22px 0;border-bottom:1px solid var(--line);transition:color .2s}
 .contact-action:hover{color:#a57c1d}
-.contact-label{color:var(--muted);font-size:10px;font-weight:850;letter-spacing:.13em;text-transform:uppercase}
+.contact-label{color:var(--muted);font-size:14px;font-weight:850;letter-spacing:.13em;text-transform:uppercase}
 .contact-action strong{font-size:18px;font-weight:800;letter-spacing:-.02em;text-align:right}
 
 @media(max-width:780px){
