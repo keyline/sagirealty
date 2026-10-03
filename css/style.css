@@ -140,7 +140,9 @@
     font-size:14px;
     line-height:1;
   }
-
+  .floating-cta{
+    transform: unset;
+  }
   .site-footer{padding-bottom:76px}
   .footer-main{
     display:flex;
