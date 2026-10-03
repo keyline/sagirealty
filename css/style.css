@@ -52,7 +52,7 @@
 .amenities{background:#f4f6f8}
 .enquiry-banner{background:#eef1f4;border-block:1px solid var(--line)}
 .enquiry-inner h2 span{color:var(--ink)}
-.floating-cta a{background:var(--midnight);color:#fff}
+.floating-cta a{background:var(--gold-pale);color:#fff}
 
 @media(max-width:780px){
   .site-header,
