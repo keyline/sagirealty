@@ -8,6 +8,7 @@ use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 
 require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/includes/leads.php';
 
 $smtpConfigPath = __DIR__ . '/smtp-config.php';
 if (!is_file($smtpConfigPath)) {
@@ -88,6 +89,19 @@ if ($errors) {
     respond(false, implode(' ', $errors));
 }
 
+try {
+    leads_add([
+        'name' => $name,
+        'phone' => $phone,
+        'email' => $email,
+        'interest' => $interest,
+        'source' => $source,
+    ]);
+} catch (Throwable $exception) {
+    error_log('SAGI Realty lead storage error: ' . $exception->getMessage());
+    respond(false, 'Your enquiry could not be saved right now. Please try again shortly.');
+}
+
 $safeName = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
 $safeEmail = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
 $safePhone = htmlspecialchars($phone, ENT_QUOTES, 'UTF-8');
@@ -142,7 +156,7 @@ try {
     $mail->send();
 } catch (Exception $exception) {
     error_log('SAGI Realty SMTP error: ' . $exception->getMessage());
-    respond(false, 'Your enquiry could not be sent right now. Please try again shortly.');
+    // The enquiry is already safely stored for the admin. Email is only a notification.
 }
 
 respond(true, 'Thank you. Your enquiry has been submitted.', 'thank-you.html');

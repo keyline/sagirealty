@@ -31,3 +31,18 @@ The project numbers/pricing in the page are taken from the supplied promotional 
 
 Use a dedicated landing-page URL such as:
 `https://yourdomain.com/new-town-pre-launch/`
+
+## Admin lead dashboard
+
+Every valid form submission is stored before the email notification is sent. Open
+`/admin.php` on the same website to search leads, update status, or export CSV.
+
+To configure admin access:
+
+1. Copy `admin-config.example.php` to `storage/admin-config.php`.
+2. Generate a secure password hash:
+   `php -r "echo password_hash('Choose-a-strong-password', PASSWORD_DEFAULT), PHP_EOL;"`
+3. Paste the hash into `storage/admin-config.php` and set the desired username.
+
+The private config and lead database are excluded from Git. PHP must be able to
+write to the project directory so it can create `storage/` on the first submission.
