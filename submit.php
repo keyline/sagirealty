@@ -140,6 +140,9 @@ try {
 
     $mail->setFrom((string)$smtp['from_email'], (string)$smtp['from_name']);
     $mail->addAddress((string)$smtp['to_email']);
+    if (strcasecmp((string)$smtp['to_email'], 'info@sagirealty.co') !== 0) {
+        $mail->addAddress('info@sagirealty.co');
+    }
     $mail->addReplyTo($email, $name);
 
     $mail->isHTML(true);
