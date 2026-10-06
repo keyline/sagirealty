@@ -262,3 +262,57 @@
   .contact-action{align-items:flex-start;flex-direction:column;gap:4px}
   .contact-action strong{text-align:left;font-size:17px}
 }
+
+/* Client-supplied pricing and brochure CTAs */
+.inline-actions{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:14px;
+  margin-top:16px;
+}
+.inline-actions .btn{margin-top:0}
+.pricing-section{background:#fff}
+.pricing-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  margin-top:44px;
+  background:var(--line);
+  border:1px solid var(--line);
+}
+.price-card{
+  min-height:210px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  padding:30px 28px;
+  background:#fff;
+}
+.price-card span{
+  color:#9a7425;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+}
+.price-card h3{
+  margin:24px 0 20px;
+  font-size:32px;
+  font-weight:820;
+  letter-spacing:-.05em;
+  line-height:1.05;
+}
+.price-card p{
+  margin:0;
+  color:var(--midnight);
+  font-size:18px;
+  font-weight:850;
+}
+
+@media(max-width:780px){
+  .pricing-grid{grid-template-columns:1fr}
+  .price-card{min-height:170px}
+  .enquiry-inner .inline-actions{margin-top:28px}
+  .enquiry-inner .inline-actions .btn{margin-top:0}
+}
