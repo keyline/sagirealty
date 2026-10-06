@@ -44,8 +44,7 @@
 .site-header.scrolled .brand img{filter:none}
 .nav-cta,
 .site-header.scrolled .nav-cta{border-color:var(--ink);color:var(--ink)}
-.nav-cta,
-.site-header.scrolled .nav-cta:hover{border-color:var(--gold-pale);color: #fff; background: var(--gold-pale);}
+.nav-cta:hover{border-color:var(--gold-pale);color: #fff; background: var(--gold-pale);}
 .nav-cta:hover{background:var(--midnight);border-color:var(--midnight);color:#fff}
 .btn-primary{background:var(--midnight);color:#fff}
 .btn-primary:hover{background:#173657}
