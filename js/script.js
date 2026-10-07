@@ -3,10 +3,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const menuToggle = document.querySelector(".menu-toggle");
   const mobileNav = document.querySelector(".mobile-nav");
   const year = document.getElementById("year");
-  const form = document.querySelector(".lead-form");
+  const forms = document.querySelectorAll(".lead-form");
   const modal = document.getElementById("imageModal");
   const modalImage = document.getElementById("modalImage");
   const modalClose = document.querySelector(".modal-close");
+  const brochureModal = document.getElementById("brochureModal");
+  const brochureForm = brochureModal?.querySelector(".brochure-form");
+  const brochureClose = brochureModal?.querySelector(".brochure-close");
+  const brochurePath = "assets/pa-aroha-brochure.pdf";
+  let brochureAction = null;
+  let brochureTrigger = null;
 
   // Site-wide smooth scrolling. Native scrolling remains as the CDN fallback.
   const lenis = typeof window.Lenis === "function"
@@ -89,8 +95,52 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Escape" && modal.classList.contains("open")) closeModal();
   });
 
+  const closeBrochureModal = () => {
+    brochureModal.classList.remove("open");
+    brochureModal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+    lenis?.start();
+    brochureAction = null;
+    brochureTrigger?.focus();
+  };
+
+  document.querySelectorAll("[data-brochure-action]").forEach(button => {
+    button.addEventListener("click", () => {
+      brochureAction = button.dataset.brochureAction;
+      brochureTrigger = button;
+      brochureForm.reset();
+      brochureForm.querySelectorAll(".field.invalid").forEach(field => field.classList.remove("invalid"));
+      brochureForm.querySelectorAll(".field-error, .form-global-error").forEach(error => error.textContent = "");
+      brochureForm.querySelector(".btn-label").textContent = brochureAction === "download" ? "Download Brochure" : "View Brochure";
+      brochureModal.classList.add("open");
+      brochureModal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+      lenis?.stop();
+      brochureForm.querySelector('[name="name"]').focus();
+    });
+  });
+
+  brochureClose?.addEventListener("click", closeBrochureModal);
+  brochureModal?.addEventListener("click", e => {
+    if (e.target === brochureModal) closeBrochureModal();
+  });
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && brochureModal?.classList.contains("open")) closeBrochureModal();
+    if (e.key !== "Tab" || !brochureModal?.classList.contains("open")) return;
+    const focusable = [...brochureModal.querySelectorAll('button:not(:disabled), input:not([tabindex="-1"]), select')];
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  });
+
   // Client-side form validation + AJAX submission.
-  form?.addEventListener("submit", async (e) => {
+  forms.forEach(form => form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const globalError = form.querySelector(".form-global-error");
@@ -102,9 +152,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const fields = {
-      name: form.querySelector("#name"),
-      phone: form.querySelector("#phone"),
-      email: form.querySelector("#email")
+      name: form.querySelector('[name="name"]'),
+      phone: form.querySelector('[name="phone"]'),
+      email: form.querySelector('[name="email"]')
     };
     let valid = true;
 
@@ -121,7 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const consent = form.querySelector('input[name="consent"]');
 
     setError(fields.name, name.length < 2 ? "Please enter your name." : "");
-    setError(fields.phone, phone.length !== 10 ? "Please enter a valid 10-digit mobile number." : "");
+    setError(fields.phone, !/^[6-9][0-9]{9}$/.test(phone) ? "Please enter a valid 10-digit Indian mobile number." : "");
     setError(fields.email, !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? "Please enter a valid email address." : "");
 
     if (!consent.checked) {
@@ -134,9 +184,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!valid) return;
 
     const button = form.querySelector(".btn-submit");
+    const label = button.querySelector(".btn-label");
+    const defaultLabel = label.textContent;
     button.disabled = true;
     button.classList.add("loading");
-    button.querySelector(".btn-label").textContent = "Sending...";
+    label.textContent = "Sending...";
 
     try {
       const isGitHubPages = window.location.hostname.endsWith(".github.io");
@@ -169,6 +221,21 @@ document.addEventListener("DOMContentLoaded", () => {
       const submitted = result.success === true || result.success === "true";
 
       if (response.ok && submitted) {
+        if (form === brochureForm) {
+          const requestedAction = brochureAction;
+          closeBrochureModal();
+          if (requestedAction === "download") {
+            const link = document.createElement("a");
+            link.href = brochurePath;
+            link.download = "SAGI-Realty-Brochure.pdf";
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+          } else if (requestedAction === "view") {
+            window.location.assign(brochurePath);
+          }
+          return;
+        }
         window.location.href = result.redirect || "thank-you.html";
         return;
       }
@@ -179,7 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } finally {
       button.disabled = false;
       button.classList.remove("loading");
-      button.querySelector(".btn-label").textContent = "Send My Enquiry";
+      label.textContent = defaultLabel;
     }
-  });
+  }));
 });

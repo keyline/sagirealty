@@ -319,3 +319,17 @@
   .enquiry-inner .inline-actions{margin-top:28px}
   .enquiry-inner .inline-actions .btn{margin-top:0}
 }
+
+/* Brochure enquiry and WhatsApp contact */
+.brochure-modal{position:fixed;inset:0;z-index:220;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(3,16,31,.76)}
+.brochure-modal.open{display:flex}
+.brochure-dialog{position:relative;width:min(100%,440px);max-height:calc(100dvh - 36px);overflow-y:auto;background:#fff;padding:32px;color:var(--ink);box-shadow:0 28px 80px rgba(0,0,0,.3)}
+.brochure-dialog::before{content:"";position:absolute;inset:0 0 auto;height:5px;background:var(--midnight)}
+.brochure-close{position:absolute;top:12px;right:16px;width:36px;height:36px;border:0;background:transparent;color:var(--ink);font-size:30px;line-height:1;cursor:pointer}
+.brochure-dialog .form-top{padding-right:30px}
+.brochure-dialog .form-top p{font-size:12px}
+.whatsapp-button{position:fixed;right:20px;bottom:20px;z-index:95;display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:#25d366;color:#fff;box-shadow:0 8px 25px rgba(0,0,0,.25);transition:transform .2s,background .2s}
+.whatsapp-button:hover,.whatsapp-button:focus-visible{transform:translateY(-3px);background:#1ebc59}
+.whatsapp-button svg{width:30px;height:30px}
+@media(max-width:600px){.whatsapp-button{right:18px;bottom:76px;width:50px;height:50px}.whatsapp-button svg{width:27px;height:27px}}
+@media(max-width:480px){.brochure-dialog{padding:25px 22px}.brochure-dialog .form-top h2{font-size:25px}}
