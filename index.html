@@ -25,7 +25,7 @@
     </div>
     <div class="container nav-wrap">
       <a class="brand" href="#top" aria-label="SAGI Realty home">
-        <img src="assets/sagi-realty-logo.jpg" alt="SAGI Realty - Your Dream, Our Priority">
+        <img src="assets/sagi-realty-logo.png" alt="SAGI Realty - Your Dream, Our Priority">
       </a>
       <nav class="main-nav" aria-label="Main navigation">
         <a href="#overview">Overview</a>
@@ -60,7 +60,7 @@
       </div>
       <div class="container hero-grid">
         <div class="hero-copy reveal">
-          <div class="eyebrow"><span></span>Pre-launch Premium Residential Project</div>
+          <div class="eyebrow"><span></span> Premium Residential Project</div>
           <h1>Live Bigger.<br><em>Live Better.</em><br>In New Town.</h1>
           <p class="hero-lead">
             Discover a premium residential opportunity in <strong>New Town, Kolkata</strong>,
@@ -76,7 +76,7 @@
 
           <div class="hero-actions">
             <a href="#enquiry" class="btn btn-primary btn-yellow">Request Project Details <span>&rarr;</span></a>
-            <a href="assets/pa-aroha-brochure.pdf" class="btn btn-primary" target="_blank" rel="noopener">View Brochure <span>&nearr;</span></a>
+            <button type="button" class="btn btn-primary" data-brochure-action="view">View Brochure <span>&nearr;</span></button>
           </div>
           <p class="micro-note">*As shared by the client. Confirm current pricing, availability and project details with the sales team.</p>
         </div>
@@ -166,7 +166,7 @@
           </p>
           <div class="inline-actions">
             <a class="btn btn-outline" href="#enquiry">Check Availability <span>&rarr;</span></a>
-            <a class="btn btn-outline" href="assets/pa-aroha-brochure.pdf" target="_blank" rel="noopener">Download Brochure <span>&darr;</span></a>
+            <button type="button" class="btn btn-outline" data-brochure-action="download">Download Brochure <span>&darr;</span></button>
           </div>
         </div>
 
@@ -301,7 +301,7 @@
         </div>
         <div class="inline-actions">
           <a class="btn btn-light" href="#enquiry">Request Details <span>&rarr;</span></a>
-          <a class="btn btn-light" href="assets/pa-aroha-brochure.pdf" target="_blank" rel="noopener">View Brochure <span>&nearr;</span></a>
+          <button type="button" class="btn btn-light" data-brochure-action="view">View Brochure <span>&nearr;</span></button>
         </div>
       </div>
     </section>
@@ -347,7 +347,7 @@
           </details>
           <details class="reveal">
             <summary>Is the brochure available?</summary>
-            <p>Yes. Use the brochure button on this page to view the supplied project brochure.</p>
+            <p>Yes. Select a brochure button, submit the short enquiry form, then view or download the supplied project brochure.</p>
           </details>
           <details class="reveal">
             <summary>How can I get the latest project details?</summary>
@@ -360,9 +360,17 @@
 
   <footer class="site-footer">
     <div class="container footer-main">
-      <div>
+      <div class="footer-brand-block">
         <a class="brand footer-brand" href="#top">
-          <img src="assets/sagi-realty-logo.jpg" alt="SAGI Realty - Your Dream, Our Priority">
+          <img src="assets/sagi-realty-logo-footer.png" alt="SAGI Realty - Your Dream, Our Priority">
+        </a>
+        <a class="footer-phone" href="tel:+919831103811" aria-label="Call SAGI Realty at 98311 03811">
+          <span class="footer-phone-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.19 18.8a19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.09 4.18 2 2 0 0 1 4.08 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.91.71 2.81a2 2 0 0 1-.45 2.11L8.07 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.58 2.81.71A2 2 0 0 1 22 16.92Z"/>
+            </svg>
+          </span>
+          <span class="footer-phone-text"><small>Call us</small><strong>98311 03811</strong></span>
         </a>
       </div>
       <div class="footer-contact">
@@ -380,6 +388,64 @@
     <button class="modal-close" type="button" aria-label="Close preview">&times;</button>
     <img id="modalImage" src="" alt="Project creative preview">
   </div>
+
+  <div class="brochure-modal" id="brochureModal" role="dialog" aria-modal="true" aria-labelledby="brochureModalTitle" aria-hidden="true">
+    <div class="brochure-dialog">
+      <button class="brochure-close" type="button" aria-label="Close brochure form">&times;</button>
+      <div class="form-top">
+        <span class="form-badge">PROJECT BROCHURE</span>
+        <h2 id="brochureModalTitle">Get the brochure</h2>
+        <p>Share your details to view or download the project brochure.</p>
+      </div>
+      <form class="lead-form brochure-form" action="submit.php" method="POST" data-static-action="https://formsubmit.co/ajax/applicationtest@keylines.net" novalidate>
+        <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off">
+        <input type="text" name="_honey" class="hp-field" tabindex="-1" autocomplete="off">
+        <input type="hidden" name="source" value="SAGI Realty Brochure Request">
+        <input type="hidden" name="_subject" value="New SAGI Realty Brochure Request">
+        <input type="hidden" name="_template" value="table">
+
+        <div class="field">
+          <label for="brochure-name">Full Name <span>*</span></label>
+          <input id="brochure-name" name="name" type="text" placeholder="Enter your full name" maxlength="80" required>
+          <small class="field-error"></small>
+        </div>
+        <div class="field">
+          <label for="brochure-phone">Phone Number <span>*</span></label>
+          <input id="brochure-phone" name="phone" type="tel" placeholder="10-digit mobile number" maxlength="15" required>
+          <small class="field-error"></small>
+        </div>
+        <div class="field">
+          <label for="brochure-email">Email Address <span>*</span></label>
+          <input id="brochure-email" name="email" type="email" placeholder="you@example.com" maxlength="120" required>
+          <small class="field-error"></small>
+        </div>
+        <div class="field">
+          <label for="brochure-interest">I'm Interested In</label>
+          <select id="brochure-interest" name="interest">
+            <option value="3 BHK">3 BHK</option>
+            <option value="4 BHK">4 BHK</option>
+            <option value="Both 3 &amp; 4 BHK">Both 3 &amp; 4 BHK</option>
+            <option value="Investment / Details">Investment / Project Details</option>
+          </select>
+        </div>
+        <label class="consent">
+          <input type="checkbox" name="consent" value="1" required>
+          <span>I agree to be contacted regarding this project and understand that my information will be used for this enquiry.</span>
+        </label>
+        <small class="form-global-error" role="alert"></small>
+        <button type="submit" class="btn btn-submit">
+          <span class="btn-label">View Brochure</span>
+          <span class="spinner" aria-hidden="true"></span>
+          <span class="btn-arrow">&rarr;</span>
+        </button>
+        <p class="secure-note">Secure enquiry - your details go directly to the project team.</p>
+      </form>
+    </div>
+  </div>
+
+  <a class="whatsapp-button" href="https://wa.me/919831103811" target="_blank" rel="noopener noreferrer" aria-label="Chat with SAGI Realty on WhatsApp" title="Chat on WhatsApp">
+    <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16 .9A15.1 15.1 0 0 0 3 23.7L.9 31l7.5-2A15.1 15.1 0 1 0 16 .9Zm0 27.4a12.2 12.2 0 0 1-6.2-1.7l-.4-.2-4.4 1.2 1.2-4.3-.3-.4A12.2 12.2 0 1 1 16 28.3Zm6.7-9.1c-.4-.2-2.2-1.1-2.6-1.2-.3-.1-.6-.2-.8.2-.2.4-1 1.2-1.2 1.5-.2.2-.4.3-.8.1-.4-.2-1.6-.6-3-1.9-1.1-1-1.9-2.2-2.1-2.6-.2-.4 0-.6.2-.8l.6-.7.4-.6c.1-.2 0-.5 0-.7l-1.2-2.8c-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-1 .5-.3.4-1.3 1.3-1.3 3.1s1.4 3.6 1.6 3.9c.2.2 2.7 4.2 6.5 5.8 3.1 1.3 3.8 1 4.5 1 .7-.1 2.2-.9 2.5-1.8.3-.9.3-1.7.2-1.8-.1-.1-.3-.2-.7-.4Z"/></svg>
+  </a>
 
   <div class="floating-cta">
     <a href="#enquiry"><span>Enquire Now</span> <b>&rarr;</b></a>
